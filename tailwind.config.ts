@@ -10,6 +10,8 @@ const config: Config = {
     extend: {
       colors:{
 "homePageTop":"#EEE3DA".toLowerCase(), 
+"homePageMid":"#FBF1F6".toLowerCase(), 
+"homePageEnd":"#E7D9F9".toLowerCase(), 
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
