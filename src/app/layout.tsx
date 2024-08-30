@@ -1,8 +1,6 @@
-import SlideBar from "@/ui/slideBar";
 import { Providers } from "./provider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });

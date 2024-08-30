@@ -8,9 +8,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="relative flex min-h-screen">
-          <SlideBar className="flex border-cyan-400" />
-          <main className="flex">{children}</main>
+        <div className="relative flex min-h-screen  bg-white">
+          <SlideBar />
+          <main className="flex-1 flex flex-col">{children}</main>
         </div>
       </body>
     </html>

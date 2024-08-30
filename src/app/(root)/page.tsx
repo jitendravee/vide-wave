@@ -8,7 +8,7 @@ export default function HomePage() {
     return <div>Please sign in to view your profile.</div>;
   }
   return (
-    <div className=" bg-gradient-to-b from-homePageTop via-homePageMid to-homePageEnd">
+    <div className=" bg-gradient-to-b from-homePageTop via-homePageMid to-homePageEnd text-black p-4 rounded-md">
       <h1>home page</h1>
       <p>{user.fullName}</p>
       <p>{user.emailAddresses[0].emailAddress}</p>
