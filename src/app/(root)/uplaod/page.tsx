@@ -1,61 +1,28 @@
-// "use client";
-// import axios from "axios";
-// import { useState } from "react";
-
-// export default function UploadImage() {
-//   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
-//   const [url, setUrl] = useState("");
-
-//   const handleImageChange = (e: any) => {
-//     const file = e.target.files[0];
-//     const reader = new FileReader();
-//     reader.readAsDataURL(file);
-//     reader.onloadend = () => {
-//       setImage(reader.result);
-//     };
-//   };
-
-//   const handleUpload = async () => {
-//     if (!image) return;
-
-//     try {
-//       const response = await axios.post(
-//         "/api/uploadimage",
-//         { data: image },
-//         {
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//         }
-//       );
-
-//       const data = await response.data;
-//       setUrl(data.url);
-//     } catch (error) {
-//       console.error("Error uploading image:", error);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <input type="file" onChange={handleImageChange} />
-//       <button onClick={handleUpload}>Upload Image</button>
-//       {url && (
-//         <div>
-//           <p>Image URL: {url}</p>
-//           <img src={url} alt="Uploaded" />
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
 "use client";
 import { useState } from "react";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input"; // Import the Input component
+import { useForm } from "react-hook-form"; // Import useForm
 
 export default function UploadImage() {
   const [image, setImage] = useState<File | null>(null);
   const [url, setUrl] = useState<string | null>("");
+
+  // Initialize form with react-hook-form
+  const form = useForm({
+    defaultValues: {
+      username: "",
+    },
+  });
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -71,7 +38,7 @@ export default function UploadImage() {
       const formData = new FormData();
       formData.append("file", image);
 
-      const response = await fetch("/api/upload", {
+      const response = await fetch("/api/uploadimage", {
         method: "POST",
         body: formData,
       });
@@ -83,17 +50,52 @@ export default function UploadImage() {
     }
   };
 
+  const onSubmit = (data: any) => {
+    console.log("Form data:", data);
+    handleUpload(); // Upload the image on form submission
+  };
+
   return (
-    <div>
-      <input type="file" onChange={handleImageChange} />
-      <button onClick={handleUpload}>Upload Image</button>
+    <div className="p-4 bg-slate-100 min-h-screen flex justify-center items-center">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Username</FormLabel>
+                <FormControl>
+                  <Input placeholder="shadcn" {...field} />
+                </FormControl>
+                <FormDescription>
+                  This is your public display name.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Image Upload Section */}
+          <FormItem>
+            <FormLabel>Upload Image</FormLabel>
+            <FormControl>
+              <input type="file" onChange={handleImageChange} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+
+          <Button type="submit">Submit</Button>
+        </form>
+      </Form>
+
       {url && (
-        <div>
+        <div className="mt-4">
           <p>Image URL: {url}</p>
           <img
             src={url}
             alt="Uploaded"
-            style={{ maxWidth: "100%", height: "auto" }}
+            style={{ maxWidth: "20%", height: "auto" }}
           />
         </div>
       )}

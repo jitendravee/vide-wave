@@ -1,39 +1,10 @@
-// import { cloudinary } from '@/cloudinary';
-// import type { NextApiRequest, NextApiResponse } from 'next';
 
-// import { NextResponse } from 'next/server';
-
-// export const POST = async (req: NextApiRequest) => {
-//   const apiKey = process.env.CLOUDINARY_API_KEY;
-
-  
-//   try {
-//     const { data } = await req.body;
-
-//     // Upload the data to Cloudinary
-//     const uploadResponse = await cloudinary.uploader.upload(data, {
-//       upload_preset: 'ml_default',
-//     });
-
-//     // Return the secure URL from Cloudinary
-//     return NextResponse.json(
-//       { message: "success in upload", url: uploadResponse.secure_url },
-//       { status: 200 }
-//     );
-//   } catch (error: any) {
-//     console.error('Error uploading image:', error);
-//     return NextResponse.json(
-//       { error: 'Failed to upload image: ' + error.message },
-//       { status: 500 }
-//     );
-//   }
-// };
 
 import { cloudinary } from '@/cloudinary';
 import { NextRequest, NextResponse } from 'next/server';
 
 
-// Function to upload the file to Cloudinary
+
 const uploadToCloudinary = async (fileUri: string, fileName: string) => {
   try {
     const result = await cloudinary.uploader.upload(fileUri, {

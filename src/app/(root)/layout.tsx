@@ -1,4 +1,4 @@
-import SlideBar from "@/ui/slideBar";
+import SlideBar from "@/ui/slidebar";
 
 export default function RootLayout({
   children,
