@@ -15,17 +15,16 @@ const sidebarOptions: SidebarOption[] = [
 
 export default function SlideBar() {
   return (
-    <div className="w-64">
+    <div className="">
       {" "}
-      {/* Adjust width if necessary */}
-      <ul className="flex flex-col">
+      <ul className="flex flex-col ">
         {sidebarOptions.map((option, index) => (
           <li
             key={index}
             className="flex items-center p-4 space-x-2 hover:bg-gray-200"
           >
             {option.icon}
-            <a href={option.link} className="text-base font-medium">
+            <a href={option.link} className="text-base  font-medium ">
               {option.title}
             </a>
           </li>
